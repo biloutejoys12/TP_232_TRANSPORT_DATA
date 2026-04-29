@@ -190,7 +190,7 @@ st.markdown("""
 <div style="text-align:center; padding: 2rem 0 1rem;">
     <div class="badge">📍 Yaoundé, Cameroun</div>
     <div class="hero-title">Enquête Mobilité Urbaine<br>
-    <span class="hero-accent">Yaoundé 2025</span></div>
+    <span class="hero-accent">Yaoundé 2026_TP_232.</span></div>
     <p style="color:#6b7f96; font-size:1rem; margin-top:0.5rem;">
     Collecte de données sur les habitudes de transport des habitants de Yaoundé
     </p>
@@ -209,9 +209,9 @@ with tab1:
     st.markdown("### 👤 Informations personnelles")
     col1, col2 = st.columns(2)
     with col1:
-        nom = st.text_input("Nom complet", placeholder="Ex: Jean Mballa")
+        nom = st.text_input("Nom complet", placeholder="Ex: biloute joys")
     with col2:
-        age = st.number_input("Âge (années)", min_value=1, max_value=120, value=25, step=1)
+        age = st.number_input("Âge (années)", min_value=1, max_value=120, value=21, step=1)
 
     st.markdown("### 🚗 Mode de transport")
     transport_options = {
