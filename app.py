@@ -13,6 +13,14 @@ data = [
 df = pd.DataFrame(data)
 st.dataframe(df)
 
+st.title("TP 232 Transport Data")
+
+# ouvrir le fichier HTML
+with open("index.html", "r", encoding="utf-8") as f:
+    html_code = f.read()
+
+# afficher le frontend
+st.components.v1.html(html_code, height=800)
 
 
 
