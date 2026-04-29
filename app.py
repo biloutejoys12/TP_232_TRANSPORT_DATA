@@ -148,4 +148,8 @@ def supprimer_enquete(enquete_id):
 if __name__ == "__main__":
     init_db()
     print("🚀 API Transport Yaoundé démarrée sur http://localhost:5000")
+<<<<<<< HEAD
    
+=======
+ 
+>>>>>>> 158e2c3ea4554677309766ceeb47d418f23f8019
