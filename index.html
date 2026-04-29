@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TransportData Yaoundé</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0a0e1a;
+  --surface: #111827;
+  --surface2: #1a2332;
+  --border: #1f2d42;
+  --accent: #f4a935;
+  --accent2: #e8573a;
+  --green: #3ecf8e;
+  --blue: #4da3ff;
+  --text: #e8edf5;
+  --text-muted: #6b7f96;
+  --text-dim: #3d5068;
+  --radius: 14px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(244,169,53,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244,169,53,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HEADER ── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,26,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+}
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+}
+.logo span { color: var(--accent); }
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+}
+.nav-tab {
+  padding: 6px 18px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-tab.active {
+  background: var(--accent);
+  color: #0a0e1a;
+  font-weight: 600;
+}
+.nav-tab:hover:not(.active) { color: var(--text); background: var(--surface2); }
+
+/* ── MAIN ── */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  animation: fadeUp 0.7s ease both;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(244,169,53,0.1);
+  border: 1px solid rgba(244,169,53,0.25);
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 1.5rem;
+}
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+.hero h1 .line2 {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero p {
+  color: var(--text-muted);
+  max-width: 520px;
+  margin: 0 auto;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+/* ── PAGES ── */
+.page { display: none; animation: fadeUp 0.4s ease both; }
+.page.active { display: block; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── STATS CARDS ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.stat-card:hover { border-color: rgba(244,169,53,0.3); transform: translateY(-2px); }
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: radial-gradient(circle at top right, rgba(244,169,53,0.08), transparent 70%);
+}
+.stat-icon { font-size: 1.4rem; margin-bottom: 0.6rem; }
+.stat-value {
+  font-family: var(--font-head);
+  font-size: 1.9rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* ── FORM ── */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.form-title {
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.form-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; }
+
+.form-section-title {
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(244,169,53,0.15);
+}
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-grid.single { grid-template-columns: 1fr; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.span2 { grid-column: 1 / -1; }
+
+label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+input, select {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 10px 14px;
+  border-radius: 9px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  appearance: none;
+}
+input::placeholder { color: var(--text-dim); }
+input:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(244,169,53,0.12);
+}
+input.error, select.error { border-color: var(--accent2); }
+
+/* Transport pills */
+.transport-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.transport-pill {
+  background: var(--surface2);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  user-select: none;
+}
+.transport-pill:hover { border-color: rgba(244,169,53,0.4); }
+.transport-pill.selected {
+  border-color: var(--accent);
+  background: rgba(244,169,53,0.1);
+  color: var(--accent);
+}
+.transport-pill .pill-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+.transport-pill .pill-label { font-size: 0.75rem; font-weight: 500; }
+
+/* Star rating */
+.star-row { display: flex; gap: 6px; }
+.star {
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--border);
+  transition: color 0.15s, transform 0.1s;
+  line-height: 1;
+}
+.star:hover, .star.active { color: var(--accent); transform: scale(1.15); }
+.star-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+
+/* Submit btn */
+.btn-submit {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(244,169,53,0.2);
+}
+.btn-submit:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(244,169,53,0.3); }
+.btn-submit:active { transform: translateY(0); }
+.btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  opacity: 0;
+  transition: all 0.3s;
+  z-index: 200;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.success { border-color: var(--green); color: var(--green); }
+.toast.error { border-color: var(--accent2); color: var(--accent2); }
+
+/* ── TABLE ── */
+.table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.table-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.filter-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filter-row select { padding: 7px 12px; font-size: 0.83rem; min-width: 160px; }
+.btn-refresh {
+  padding: 7px 16px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.btn-refresh:hover { border-color: var(--accent); color: var(--accent); }
+
+.table-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  overflow-x: auto;
+}
+table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+thead { background: var(--surface2); }
+th {
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+td { padding: 11px 14px; border-top: 1px solid var(--border); vertical-align: middle; }
+tr:hover td { background: rgba(244,169,53,0.03); }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+.stars-display { color: var(--accent); font-size: 0.85rem; letter-spacing: 1px; }
+.btn-del {
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.btn-del:hover { border-color: var(--accent2); color: var(--accent2); }
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+.empty-state .icon { font-size: 2.5rem; margin-bottom: 0.5rem; opacity: 0.4; }
+
+/* ── STATS PAGE ── */
+.stats-section-title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.stats-bar-list { display: flex; flex-direction: column; gap: 14px; }
+.bar-item { }
+.bar-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.83rem;
+  margin-bottom: 5px;
+}
+.bar-name { display: flex; align-items: center; gap: 6px; font-weight: 500; }
+.bar-val { color: var(--accent); font-weight: 600; }
+.bar-track {
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  transition: width 1s cubic-bezier(0.4,0,0.2,1);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.detail-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.detail-card .d-val {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+.detail-card .d-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+
+.section-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Loading spinner */
+.spinner {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border: 2px solid rgba(244,169,53,0.3);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .transport-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-card { padding: 1.25rem; }
+  main { padding: 1.5rem 1rem 3rem; }
+  .hero h1 { font-size: 1.7rem; }
+  .nav-tab { padding: 6px 12px; font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🚌</div>
+      Transport<span>Data</span>
+    </div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" onclick="showPage('collecte')">📋 Collecte</button>
+      <button class="nav-tab" onclick="showPage('donnees')">📊 Données</button>
+      <button class="nav-tab" onclick="showPage('stats')">📈 Stats</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- PAGE COLLECTE -->
+<div class="page active" id="page-collecte">
+  <div class="hero">
+    <div class="hero-badge">📍 Yaoundé, Cameroun</div>
+    <h1>Enquête Mobilité Urbaine<br><span class="line2">Yaoundé 2026</span></h1>
+    <p>Collecte de données sur les habitudes de transport des habitants de Yaoundé_TP_232.</p>
+  </div>
+
+  <div class="form-card">
+    <div class="form-title">Nouvelle enquête</div>
+    <div class="form-subtitle">Remplissez tous les champs pour enregistrer les données du participant.</div>
+
+    <div class="form-section-title">👤 Informations personnelles</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Nom complet</label>
+        <input type="text" id="f-nom" placeholder="Ex: joys" />
+      </div>
+      <div class="field">
+        <label>Âge (années)</label>
+        <input type="number" id="f-age" placeholder="Ex: 21" min="1" max="120" />
+      </div>
+    </div>
+
+    <div class="form-section-title">🚗 Mode de transport</div>
+    <div class="transport-grid" id="transport-grid">
+      <div class="transport-pill" data-val="bus" onclick="selectTransport(this)">
+        <span class="pill-icon">🚌</span>
+        <span class="pill-label">Bus CRTV</span>
+      </div>
+      <div class="transport-pill" data-val="taxi" onclick="selectTransport(this)">
+        <span class="pill-icon">🚕</span>
+        <span class="pill-label">Taxi</span>
+      </div>
+      <div class="transport-pill" data-val="moto_taxi" onclick="selectTransport(this)">
+        <span class="pill-icon">🏍️</span>
+        <span class="pill-label">Moto-taxi</span>
+      </div>
+      <div class="transport-pill" data-val="voiture_personnelle" onclick="selectTransport(this)">
+        <span class="pill-icon">🚗</span>
+        <span class="pill-label">Voiture perso</span>
+      </div>
+      <div class="transport-pill" data-val="marche_a_pied" onclick="selectTransport(this)">
+        <span class="pill-icon">🚶</span>
+        <span class="pill-label">À pied</span>
+      </div>
+      <div class="transport-pill" data-val="autre" onclick="selectTransport(this)">
+        <span class="pill-icon">🔄</span>
+        <span class="pill-label">Autre</span>
+      </div>
+    </div>
+
+    <div class="form-section-title">⏱️ Expérience de trajet</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Temps d'attente (minutes)</label>
+        <input type="number" id="f-attente" placeholder="Ex: 15" min="0" />
+      </div>
+      <div class="field">
+        <label>Prix payé (FCFA)</label>
+        <input type="number" id="f-prix" placeholder="Ex: 250" min="0" />
+      </div>
+    </div>
+
+    <div class="form-section-title">⭐ Niveau de confort</div>
+    <div class="field">
+      <label>Notez le confort du trajet</label>
+      <div class="star-row" id="star-row">
+        <span class="star" data-val="1" onclick="setStar(1)">★</span>
+        <span class="star" data-val="2" onclick="setStar(2)">★</span>
+        <span class="star" data-val="3" onclick="setStar(3)">★</span>
+        <span class="star" data-val="4" onclick="setStar(4)">★</span>
+        <span class="star" data-val="5" onclick="setStar(5)">★</span>
+      </div>
+      <div class="star-label" id="star-label">Cliquez pour noter</div>
+    </div>
+
+    <button class="btn-submit" id="btn-submit" onclick="submitForm()">
+      Enregistrer l'enquête →
+    </button>
+  </div>
+</div>
+
+<!-- PAGE DONNÉES -->
+<div class="page" id="page-donnees">
+  <div class="table-header">
+    <div class="table-title">📋 Données collectées</div>
+    <div class="filter-row">
+      <select id="filter-transport" onchange="loadDonnees()">
+        <option value="">Tous les transports</option>
+        <option value="bus">🚌 Bus</option>
+        <option value="taxi">🚕 Taxi</option>
+        <option value="moto_taxi">🏍️ Moto-taxi</option>
+        <option value="voiture_personnelle">🚗 Voiture</option>
+        <option value="marche_a_pied">🚶 À pied</option>
+        <option value="autre">🔄 Autre</option>
+      </select>
+      <button class="btn-refresh" onclick="loadDonnees()">↻ Actualiser</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Âge</th>
+          <th>Transport</th>
+          <th>Attente</th>
+          <th>Prix (FCFA)</th>
+          <th>Confort</th>
+          <th>Date</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <tr><td colspan="9"><div class="empty-state"><div class="icon">📭</div>Chargement…</div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PAGE STATS -->
+<div class="page" id="page-stats">
+  <div class="stats-grid" id="stats-cards">
+    <div class="stat-card"><div class="stat-icon">👥</div><div class="stat-value" id="s-total">—</div><div class="stat-label">Enquêtes totales</div></div>
+    <div class="stat-card"><div class="stat-icon">⏱️</div><div class="stat-value" id="s-attente">—</div><div class="stat-label">Attente moy. (min)</div></div>
+    <div class="stat-card"><div class="stat-icon">💰</div><div class="stat-value" id="s-prix">—</div><div class="stat-label">Prix moy. (FCFA)</div></div>
+    <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-value" id="s-confort">—</div><div class="stat-label">Confort moyen /5</div></div>
+  </div>
+
+  <div class="section-card">
+    <div class="stats-section-title">📊 Répartition par mode de transport</div>
+    <div class="stats-bar-list" id="bar-list">
+      <div class="empty-state"><div class="icon">📊</div>Chargement des statistiques…</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="stats-section-title">🔍 Détail global</div>
+    <div class="detail-grid" id="detail-grid">
+      <div class="detail-card"><div class="d-val" id="d-age">—</div><div class="d-label">Âge moyen</div></div>
+      <div class="detail-card"><div class="d-val" id="d-att">—</div><div class="d-label">Attente moy. (min)</div></div>
+      <div class="detail-card"><div class="d-val" id="d-prix">—</div><div class="d-label">Prix moy. (FCFA)</div></div>
+      <div class="detail-card"><div class="d-val" id="d-conf">—</div><div class="d-label">Confort moyen</div></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "http://localhost:5000/api";
+
+let selectedTransport = null;
+let selectedStar = 0;
+
+// ── Nav ──
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.currentTarget.classList.add('active');
+  if (name === 'donnees') loadDonnees();
+  if (name === 'stats') loadStats();
+}
+
+// ── Transport ──
+function selectTransport(el) {
+  document.querySelectorAll('.transport-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTransport = el.dataset.val;
+}
+
+// ── Stars ──
+const starLabels = ['', 'Très inconfortable', 'Inconfortable', 'Correct', 'Confortable', 'Très confortable'];
+function setStar(n) {
+  selectedStar = n;
+  document.querySelectorAll('.star').forEach((s, i) => {
+    s.classList.toggle('active', i < n);
+  });
+  document.getElementById('star-label').textContent = starLabels[n];
+}
+
+// ── Toast ──
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ── Submit ──
+async function submitForm() {
+  const nom = document.getElementById('f-nom').value.trim();
+  const age = document.getElementById('f-age').value;
+  const attente = document.getElementById('f-attente').value;
+  const prix = document.getElementById('f-prix').value;
+
+  // Reset errors
+  ['f-nom','f-age','f-attente','f-prix'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+  });
+
+  let hasError = false;
+  if (!nom) { document.getElementById('f-nom').classList.add('error'); hasError = true; }
+  if (!age || age < 1 || age > 120) { document.getElementById('f-age').classList.add('error'); hasError = true; }
+  if (!selectedTransport) { showToast('Veuillez choisir un transport', 'error'); hasError = true; }
+  if (attente === '' || attente < 0) { document.getElementById('f-attente').classList.add('error'); hasError = true; }
+  if (!prix || prix < 0) { document.getElementById('f-prix').classList.add('error'); hasError = true; }
+  if (!selectedStar) { showToast('Veuillez noter le confort', 'error'); hasError = true; }
+
+  if (hasError) return;
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Enregistrement…';
+
+  try {
+    const res = await fetch(`${API}/enquetes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nom, age: parseInt(age),
+        type_transport: selectedTransport,
+        temps_attente: parseInt(attente),
+        prix: parseFloat(prix),
+        confort: selectedStar
+      })
+    });
+    const data = await res.json();
+    if (res.ok) {
+      showToast('✅ Enquête enregistrée avec succès !', 'success');
+      resetForm();
+    } else {
+      showToast('❌ ' + (data.erreur || 'Erreur serveur'), 'error');
+    }
+  } catch (e) {
+    showToast('❌ Serveur non disponible (démarrez app.py)', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Enregistrer l\'enquête →';
+  }
+}
+
+function resetForm() {
+  ['f-nom','f-age','f-attente','f-prix'].forEach(id => {
+    document.getElementById(id).value = '';
+    document.getElementById(id).classList.remove('error');
+  });
+  document.querySelectorAll('.transport-pill').forEach(p => p.classList.remove('selected'));
+  selectedTransport = null;
+  selectedStar = 0;
+  document.querySelectorAll('.star').forEach(s => s.classList.remove('active'));
+  document.getElementById('star-label').textContent = 'Cliquez pour noter';
+}
+
+// ── Données ──
+const transportMeta = {
+  bus: { icon: '🚌', label: 'Bus' },
+  taxi: { icon: '🚕', label: 'Taxi' },
+  moto_taxi: { icon: '🏍️', label: 'Moto-taxi' },
+  voiture_personnelle: { icon: '🚗', label: 'Voiture' },
+  marche_a_pied: { icon: '🚶', label: 'À pied' },
+  autre: { icon: '🔄', label: 'Autre' },
+};
+
+async function loadDonnees() {
+  const filter = document.getElementById('filter-transport').value;
+  const url = filter ? `${API}/enquetes?transport=${filter}` : `${API}/enquetes`;
+  try {
+    const res = await fetch(url);
+    const rows = await res.json();
+    renderTable(rows);
+  } catch (e) {
+    document.getElementById('table-body').innerHTML =
+      '<tr><td colspan="9"><div class="empty-state"><div class="icon">⚠️</div>Serveur non disponible</div></td></tr>';
+  }
+}
+
+function renderTable(rows) {
+  const tb = document.getElementById('table-body');
+  if (!rows.length) {
+    tb.innerHTML = '<tr><td colspan="9"><div class="empty-state"><div class="icon">📭</div>Aucune donnée pour ce filtre</div></td></tr>';
+    return;
+  }
+  tb.innerHTML = rows.map(r => {
+    const meta = transportMeta[r.type_transport] || { icon: '❓', label: r.type_transport };
+    const stars = '★'.repeat(r.confort) + '☆'.repeat(5 - r.confort);
+    const date = new Date(r.date_collecte).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+    return `<tr>
+      <td style="color:var(--text-dim)">${r.id}</td>
+      <td><strong>${r.nom}</strong></td>
+      <td>${r.age} ans</td>
+      <td><span class="badge">${meta.icon} ${meta.label}</span></td>
+      <td>${r.temps_attente} min</td>
+      <td>${r.prix.toLocaleString('fr-FR')} FCFA</td>
+      <td><span class="stars-display">${stars}</span></td>
+      <td style="color:var(--text-muted);font-size:0.8rem">${date}</td>
+      <td><button class="btn-del" onclick="deleteRow(${r.id})">✕</button></td>
+    </tr>`;
+  }).join('');
+}
+
+async function deleteRow(id) {
+  if (!confirm('Supprimer cette enquête ?')) return;
+  try {
+    await fetch(`${API}/enquetes/${id}`, { method: 'DELETE' });
+    loadDonnees();
+    showToast('Enquête supprimée', 'success');
+  } catch (e) { showToast('Erreur', 'error'); }
+}
+
+// ── Stats ──
+async function loadStats() {
+  try {
+    const res = await fetch(`${API}/statistiques`);
+    const data = await res.json();
+
+    document.getElementById('s-total').textContent = data.total_enquetes;
+    const g = data.moyennes_globales;
+    document.getElementById('s-attente').textContent = g.moy_attente ? Math.round(g.moy_attente) : '—';
+    document.getElementById('s-prix').textContent = g.moy_prix ? Math.round(g.moy_prix).toLocaleString('fr-FR') : '—';
+    document.getElementById('s-confort').textContent = g.moy_confort ? g.moy_confort.toFixed(1) : '—';
+
+    document.getElementById('d-age').textContent = g.moy_age ? Math.round(g.moy_age) + ' ans' : '—';
+    document.getElementById('d-att').textContent = g.moy_attente ? Math.round(g.moy_attente) + ' min' : '—';
+    document.getElementById('d-prix').textContent = g.moy_prix ? Math.round(g.moy_prix).toLocaleString('fr-FR') : '—';
+    document.getElementById('d-conf').textContent = g.moy_confort ? g.moy_confort.toFixed(1) + ' / 5' : '—';
+
+    const maxNb = Math.max(...data.par_transport.map(t => t.nombre), 1);
+    const barList = document.getElementById('bar-list');
+    if (!data.par_transport.length) {
+      barList.innerHTML = '<div class="empty-state"><div class="icon">📊</div>Aucune donnée</div>';
+      return;
+    }
+    barList.innerHTML = data.par_transport.map(t => {
+      const meta = transportMeta[t.type_transport] || { icon: '❓', label: t.type_transport };
+      const pct = Math.round((t.nombre / maxNb) * 100);
+      return `<div class="bar-item">
+        <div class="bar-meta">
+          <span class="bar-name">${meta.icon} ${meta.label}</span>
+          <span class="bar-val">${t.nombre} enquête${t.nombre > 1 ? 's' : ''} · Moy: ${Math.round(t.moy_prix)} FCFA · ⭐${t.moy_confort.toFixed(1)}</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:0%" data-pct="${pct}%"></div></div>
+      </div>`;
+    }).join('');
+    // Animate bars
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.bar-fill').forEach(b => {
+        b.style.width = b.dataset.pct;
+      });
+    });
+  } catch (e) {
+    document.getElementById('bar-list').innerHTML =
+      '<div class="empty-state"><div class="icon">⚠️</div>Serveur non disponible</div>';
+  }
+}
+</script>
+</body>
+</html>
