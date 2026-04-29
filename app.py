@@ -190,9 +190,9 @@ st.markdown("""
 <div style="text-align:center; padding: 2rem 0 1rem;">
     <div class="badge">📍 Yaoundé, Cameroun</div>
     <div class="hero-title">Enquête Mobilité Urbaine<br>
-    <span class="hero-accent">Yaoundé 2026_TP_232.</span></div>
+    <span class="hero-accent">Yaoundé 2026</span></div>
     <p style="color:#6b7f96; font-size:1rem; margin-top:0.5rem;">
-    Collecte de données sur les habitudes de transport des habitants de Yaoundé
+    Collecte de données sur les habitudes de transport des habitants de Yaoundé_TP_232.
     </p>
 </div>
 """, unsafe_allow_html=True)
