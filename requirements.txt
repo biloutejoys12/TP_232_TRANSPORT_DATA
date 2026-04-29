@@ -1,5 +1,2 @@
-streamlit
-flask
-flask-cors
-gunicorn
-pandas
+streamlit==1.32.0
+pandas==2.2.1
