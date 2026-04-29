@@ -148,4 +148,4 @@ def supprimer_enquete(enquete_id):
 if __name__ == "__main__":
     init_db()
     print("🚀 API Transport Yaoundé démarrée sur http://localhost:5000")
-   app.run(host="0.0.0.0", port=5000, debug=False)
+ 
